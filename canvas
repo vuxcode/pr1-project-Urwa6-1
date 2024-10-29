@@ -1,0 +1,15 @@
+<body><canvas id = "myCanvas" width="200" height="100" style="border: 1px darkblue"></canvas>
+
+</body>
+<script>
+//Adding a canvas variable 
+var canvas = document.getElementById("myCanvas");
+//Adding a variable to create a drawing on the canvas
+var ctx = canvas.getContext("2d");
+//Filling the canvas area with color 
+ctx.fillStyle = "Red";
+//Creating a rectangle 
+ctx.fillRect(0,0,150,75);
+
+
+</script>
