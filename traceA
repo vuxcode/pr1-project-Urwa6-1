@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alphabet Tracing</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #myCanvas {
+      border: 2px solid darkblue;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myCanvas" width="300" height="200"></canvas>
+
+  <script>
+    // Get the canvas and context
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+    // Draw the outline of the letter "A" as a guide
+   // Font size and style for the letter
+    ctx.font = "bold 160px Arial";    
+    //Outline thickness
+    ctx.lineWidth = 3;               
+    // Outline color for tracing
+    ctx.strokeStyle = "lightgray";  
+    // Draw the letter "A" outline 
+    ctx.strokeText("A", 80, 150);     
+
+    // Variables to track drawing state
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    // Set up tracing color and style
+    // Color for user's trace
+    ctx.strokeStyle = "black";         
+    // Thickness for tracing
+    ctx.lineWidth = 3;              
+
+    // Start tracing when mouse is pressed down
+    function startDrawing(event) {
+      isDrawing = true;
+      lastX = event.offsetX;
+      lastY = event.offsetY;
+    }
+
+    // Stop tracing when mouse is released or leaves canvas
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    // Draw trace as user moves mouse
+    function draw(event) {
+      if (!isDrawing) return;
+       // Only draw if mouse is pressed         
+      ctx.beginPath();
+      // Move to last position
+      ctx.moveTo(lastX, lastY);        
+      // Draw line to current position
+      ctx.lineTo(event.offsetX, event.offsetY); 
+      // Apply the stroke
+      ctx.stroke();                    
+      // Update last position
+      lastX = event.offsetX;          
+      lastY = event.offsetY;
+    }
+
+    // Event listeners for mouse actions
+    // Start tracing
+    canvas.addEventListener("mousedown", startDrawing); 
+    // Draw while moving
+    canvas.addEventListener("mousemove", draw); 
+    // Stop tracing       
+    canvas.addEventListener("mouseup", stopDrawing);  
+    // Stop if mouse leaves
+    canvas.addEventListener("mouseout", stopDrawing);   
+  </script>
+</body>
+</html>
