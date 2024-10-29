@@ -1,1 +1,25 @@
+<canvas id="area"></canvas>
+<script>
+// Find the body element
+var area = document.getElementById("area");
+
+// Run the tracing function when the mouse moves on the body element
+area.addEventListener("mousemove", tracing);
+
+// Create a function to run when the mouse is moved on the body element
+function tracing(event) {
+  // Find where the mouse is on the X coordinate
+  console.log(event.clientX);
+  // Check when the mouse is on the left side of the screen (less than 200 pixels from the left side)
+  if (event.clientX < 200) {
+    // Change the background colour to show that the mouse is in the correct position
+    area.style.background = "green";
+  }
+  // Otherwise the mouse is more than 200 from the left side of the screen
+  else {
+    // Change the background colour to show that the mouse is in the wrong position
+    area.style.background = "red";
+  }
+}
+</script>
 <!-- Start writing your project code in this file! -->
