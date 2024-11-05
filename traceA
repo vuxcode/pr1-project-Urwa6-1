@@ -32,12 +32,15 @@
     // Outline color for tracing
     ctx.strokeStyle = "lightgray";  
     // Draw the letter "A" outline 
-    ctx.strokeText("A", 80, 150);     
+    ctx.strokeText("A", 80, 150);   
+    
+    //Creating an array to letter bound tracing 
+    var letterBounds = {x:80, y:50, width:150, height: 120};
 
     // Variables to track drawing state
-    let isDrawing = false;
-    let lastX = 0;
-    let lastY = 0;
+    var isDrawing = false;
+    var lastX = 0;
+    var lastY = 0;
 
     // Set up tracing color and style
     // Color for user's trace
