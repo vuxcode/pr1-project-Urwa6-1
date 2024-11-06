@@ -92,7 +92,12 @@
     startDrawing();
   }
     }
-    
+    //Adding a function to check if the mouse is within the letter bound 
+    function(IsMouseInLetter(x,y)){
+      //Adding ADD operator 
+      return x>= letterBounds.x && x<= letterBounds.x + letterBounds.width &&
+             y>= letterBounds.y && y<= letterBounds.y + letterBounds.height
+    }
 
     // Event listeners for mouse actions
     // Start tracing
