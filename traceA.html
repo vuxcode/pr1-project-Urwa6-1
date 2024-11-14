@@ -32,10 +32,10 @@
     // Outline color for tracing
     ctx.strokeStyle = "lightgray";  
     // Draw the letter "A" outline 
-    ctx.strokeText("A", 80, 150);   
+    ctx.strokeText("A", 80, 150);    
     
     //Creating an array to letter bound tracing 
-    var letterBounds = {x:80, y:50, width:150, height: 120};
+    var letterBounds = {x:80, y:50, width:150, height:120} ;
 
     // Variables to track drawing state
     var isDrawing = false;
@@ -53,12 +53,13 @@
       isDrawing = true;
       lastX = event.offsetX;
       lastY = event.offsetY;
-      //Adding if-statemnet 
-      //Only draw within letter bound 
-      if(isMouseInLetter(mouseX,mouseY){
+      //Adding if-statement 
+      //Only draw within letter bound
+      if(isMouseInLetter(mouseX,mouseY)){
         isDrawing = true;
-        last X = mouseX;
-        last Y = mouseY;
+        lastX = mouseX;
+        lastY = mouseY;
+
       }
     }
 
@@ -70,33 +71,38 @@
     // Draw trace as user moves mouse
     function draw(event) {
       if (!isDrawing) return;
-      //Define mouse X & Y
+      //Define mouseX & Y
       var mouseX = event.offsetX;
       var mouseY = event.offsetY;
-      //Only draw with in the letter 
-      if(isMouseInLetter(mouseX,mouseY){
-             // Only draw if mouse is pressed         
-      ctx.beginPath();
-      // Move to last position
-      ctx.moveTo(lastX, lastY);        
-      // Draw line to current position
-      ctx.lineTo(event.offsetX, event.offsetY); 
-      // Apply the stroke
-      ctx.stroke();                    
-      // Update last position
-      lastX = event.offsetX;          
-      lastY = event.offsetY;
-        
+
+      //Only draw if with in the letter 
+      if (isMouseInLetter(mouseX,mouseY)){
+         
+        // Only draw if mouse is pressed         
+        ctx.beginPath();
+        // Move to last position
+        ctx.moveTo(lastX, lastY);        
+        // Draw line to current position
+        ctx.lineTo(event.offsetX, event.offsetY); 
+        // Apply the stroke
+        ctx.stroke();                    
+        // Update last position
+        lastX = event.offsetX;          
+        lastY = event.offsetY;
+
       }
-  else{
-    startDrawing();
-  }
+      //Stop drawing if mouse moves outside the letter 
+      else{
+        startDrawing();
+      }
+     
     }
-    //Adding a function to check if the mouse is within the letter bound 
-    function(IsMouseInLetter(x,y)){
-      //Adding ADD operator 
-      return x>= letterBounds.x && x<= letterBounds.x + letterBounds.width &&
-             y>= letterBounds.y && y<= letterBounds.y + letterBounds.height
+
+    //Adding a function to check if the mouse is within the letter bound
+    function isMouseInLetter(x,y){
+        //Adding AND operator 
+        return x>= letterBounds.x && x<= letterBounds.x + letterBounds.width &&
+               y>= letterBounds.y && y<= letterBounds.y + letterBounds.height;
     }
 
     // Event listeners for mouse actions
