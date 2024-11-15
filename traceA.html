@@ -20,11 +20,21 @@
   <canvas id="myCanvas" width="300" height="200"></canvas>
 
   <script>
-    // Get the canvas and context
+    // Creating the variables for the canvas and context
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
 
-    // Draw the outline of the letter "A" as a guide
+    //Creating a canvas for pixel hit detection
+    //Creating variable for off-screen and display it on the screen
+
+    var offscreenCanvas = document.createElement("canvas");
+    //Creating off-screen content
+    var offscreenCtx = offscreenCanvas.getContent("2d");
+    //Boundry for height and width
+    offscreenCanvas.width = canvas.width;
+    offscreenCanvas.height = canvas.height;
+    
+   // Draw the outline of the letter "A" as a guide
    // Font size and style for the letter
     ctx.font = "bold 160px Arial";    
     //Outline thickness
@@ -33,20 +43,33 @@
     ctx.strokeStyle = "lightgray";  
     // Draw the letter "A" outline 
     ctx.strokeText("A", 80, 150);    
-    
-    //Creating an array to letter bound tracing 
-    var letterBounds = {x:80, y:50, width:150, height:120} ;
+
+    //Creating a reset line dash for user tracing 
+    ctx.setLineDash[()];
+
+    //Drawing the solid shape of A on the offscreen canvas for hit detection
+    offscreenCtx.font = "bold 160px Arial";
+    offscreenCtx.fillStyle = "black";
+    offscreenCtx.fillText("A", 80, 150);
+
 
     // Variables to track drawing state
     var isDrawing = false;
     var lastX = 0;
     var lastY = 0;
+    
+    //Creating an array to store tracing starting points
+    var traceStartPoints = [];
 
-    // Set up tracing color and style
-    // Color for user's trace
-    ctx.strokeStyle = "black";         
-    // Thickness for tracing
-    ctx.lineWidth = 3;              
+    //Checking if a pixel is within the shape of the letter A
+    //Creating a function for it 
+    function isPixelinLetter (x,y){
+      //Creating a variable for pixel data 
+      var pixelData = offscreenCtx.getImageData(x, y, 1, 1).data;
+      //If Alpha  is greater than 0 means part of the shape
+      return PixelData[3] > 0;
+      
+    };      
 
     // Start tracing when mouse is pressed down
     function startDrawing(event) {
@@ -54,11 +77,14 @@
       lastX = event.offsetX;
       lastY = event.offsetY;
       //Adding if-statement 
-      //Only draw within letter bound
-      if(isMouseInLetter(mouseX,mouseY)){
+      //Only draw within the letter bound 
+      if(isPixelinLetter(mouseX,mouseY)){
         isDrawing = true;
         lastX = mouseX;
         lastY = mouseY;
+
+        //Store the starting point 
+        traceStartpoints.push({x: mouseX, y: mouseY });
 
       }
     }
@@ -76,35 +102,26 @@
       var mouseY = event.offsetY;
 
       //Only draw if with in the letter 
-      if (isMouseInLetter(mouseX,mouseY)){
+      if (isPixelinLetter(mouseX,mouseY)){
          
         // Only draw if mouse is pressed         
         ctx.beginPath();
         // Move to last position
         ctx.moveTo(lastX, lastY);        
         // Draw line to current position
-        ctx.lineTo(event.offsetX, event.offsetY); 
+        ctx.lineTo(mouseX, mouseY); 
         // Apply the stroke
         ctx.stroke();                    
         // Update last position
-        lastX = event.offsetX;          
-        lastY = event.offsetY;
+        lastX = mouseX;          
+        lastY = mouseY;
 
       }
       //Stop drawing if mouse moves outside the letter 
       else{
-        startDrawing();
+        stopDrawing();
       }
-     
     }
-
-    //Adding a function to check if the mouse is within the letter bound
-    function isMouseInLetter(x,y){
-        //Adding AND operator 
-        return x>= letterBounds.x && x<= letterBounds.x + letterBounds.width &&
-               y>= letterBounds.y && y<= letterBounds.y + letterBounds.height;
-    }
-
     // Event listeners for mouse actions
     // Start tracing
     canvas.addEventListener("mousedown", startDrawing); 
@@ -114,6 +131,11 @@
     canvas.addEventListener("mouseup", stopDrawing);  
     // Stop if mouse leaves
     canvas.addEventListener("mouseout", stopDrawing);   
+    //Debug starting point when tracing is complete
+    canvas.addEventListener("mouseup", () => {
+    // Adding console to store the starting point 
+      console.log("Tracing Start Points:",traceStartPoints);
+    })
   </script>
 </body>
 </html>
