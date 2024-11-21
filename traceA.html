@@ -10,6 +10,7 @@
       align-items: center;
       height: 100vh;
       margin: 0;
+      background-color: antique white; 
     }
     #myCanvas {
       border: 2px solid darkblue;
@@ -58,8 +59,8 @@
     var lastX = 0;
     var lastY = 0;
     
-    //Creating an array to store tracing starting points
-    var traceStartPoints = [];
+   //Create an array to track traced pixels 
+    var tracedPixels = new Set();
 
     //Checking if a pixel is within the shape of the letter A
     //Creating a function for it 
@@ -78,13 +79,10 @@
       lastY = event.offsetY;
       //Adding if-statement 
       //Only draw within the letter bound 
-      if(isPixelinLetter(mouseX,mouseY)){
+      if(isPixelinLetter(mouseX,mouseY) && !tracedPixels.has(pixelToKey(mouseX,mouseY))){
         isDrawing = true;
         lastX = mouseX;
         lastY = mouseY;
-
-        //Store the starting point 
-        traceStartpoints.push({x: mouseX, y: mouseY });
 
       }
     }
@@ -103,7 +101,8 @@
 
       //Only draw if with in the letter 
       if (isPixelinLetter(mouseX,mouseY)){
-         
+        //Adding one more if-statement so that pixel can be traced accurately 
+        if(!tracedPixels.has(pixelToKey(mouseX,mouseY))){
         // Only draw if mouse is pressed         
         ctx.beginPath();
         // Move to last position
@@ -111,15 +110,21 @@
         // Draw line to current position
         ctx.lineTo(mouseX, mouseY); 
         // Apply the stroke
-        ctx.stroke();                    
+        ctx.stroke();      
+        //Mark the pixel as traced 
+          tracedPixels.add(pixelToKey(mouseX,mouseY))
         // Update last position
         lastX = mouseX;          
         lastY = mouseY;
-
+        //Reset background color to default
+          document.body.style.background-color = "antique white";
+        }
       }
       //Stop drawing if mouse moves outside the letter 
       else{
         stopDrawing();
+        //Change the background color to red if the tracing is outside the letter 
+        document.body.style.background-color = "red";
       }
     }
     // Event listeners for mouse actions
@@ -134,7 +139,7 @@
     //Debug starting point when tracing is complete
     canvas.addEventListener("mouseup", () => {
     // Adding console to store the starting point 
-      console.log("Tracing Start Points:",traceStartPoints);
+      console.log("Tracing Start Points:",tracedPixels);
     })
   </script>
 </body>
