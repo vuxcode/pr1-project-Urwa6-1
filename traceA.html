@@ -69,6 +69,12 @@
       var pixelData = offscreenCtx.getImageData(x, y, 1, 1).data;
       //If Alpha  is greater than 0 means part of the shape
       return PixelData[3] > 0;
+      //Converting the pixel coordinates to a unique string for the set 
+      //Adding function 
+      function pixelToKey(x,y){
+        return `${x},${y}`;
+        
+      }
       
     };      
 
