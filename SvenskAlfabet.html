@@ -214,6 +214,35 @@
   lastY = y;
     }
   }
-   
+
+  //Draw on the canvas as the user moves the mouse or finger
+  function draw(event) {
+  //If the drawing mode is not active, exit the function
+  if (!isDrawing) return;
+    
+  //Preventing the default behavior of the event
+  //This stops the issues like scrolling on touch devices
+  event.preventDefault();
+  //Get x & y coordinates of the event relative to the canvas
+  var { x, y } = getCoordinates(event);
+
+  //Checking if the current pixel x,y is part of the letter
+    if (isPixelInLetter(x, y)) {
+    //If the pixel has not already been traced
+    if (!tracedPixels.has(pixelToKey(x, y))) {
+    //Setting the fill style for the canvas to the desired color
+    ctx.fillStyle = "#AB886D";
+    //Filling a small rectangle (10x10 pixels) at the current position
+    ctx.fillRect(x, y, 10, 10); 
+
+    //Add the current pixel to the set of traced pixels
+    //This prevents duplicate coloring and ensures each pixel is counted only once
+    tracedPixels.add(pixelToKey(x, y));
+    //Updating the last drawing position to the current coordinates
+    lastX = x;
+    lastY = y;
+      }
+    }
+  }
     
    </script>
