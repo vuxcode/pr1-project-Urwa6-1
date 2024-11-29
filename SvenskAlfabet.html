@@ -149,5 +149,22 @@
     //Calculating the position for centered text 
     const x = canvas.width / 2 - 60;
     const y = canvas.height / 2 + 60;
+
+    //Draw the letter on both canvases
+    //Visible for user 
+    ctx.strokeText(letter, x, y);
+    //Invisible used for checking on off-screen
+    offscreenCtx.font = "bold 200px Arial";
+    offscreenCtx.fillStyle = "black";
+    offscreenCtx.fillText(letter, x, y);
+    }
+   
+   //Converting x & y coordinates to a unique key
+   //Allows us to efficiently track which pixels have been traced
+   function pixelToKey(x, y) {
+   return `${x},${y}`;
+   }
+
+    
     
    </script>
