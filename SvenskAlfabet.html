@@ -116,6 +116,24 @@
   var tracedPixels = new Set();
   //Setting variable for drawing to be false as a default
   var isDrawing = false, lastX = 0, lastY = 0;
+
+  //Generate buttons for all the letters
+  letters.forEach(letter => {
+    //Get element by button id
+    var button = document.createElement('button');
+    //Display letter on button
+    button.textContent = letter;
+    //Applying styles
+    button.className = 'alphabet-button';
+    button.addEventListener('click', () => {
+    //Update the selected letter
+    selectedLetter = letter;
+    //Reset the canvas 
+    resetCanvas();
+    drawLetter(letter);
+    });
+    alphabetButtons.appendChild(button);
+  });
    
 
    </script>
