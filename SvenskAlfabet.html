@@ -108,6 +108,14 @@
   //Adjusting off-screen width & height with canvas height & width
   offscreenCanvas.width = canvas.width;
   offscreenCanvas.height = canvas.height;
+
+  //Tracks traced pixels
+  //Creating variable for selected letter set A as a default
+  var selectedLetter = 'A';
+  //Creating variable for traced pixels and make a new set 
+  var tracedPixels = new Set();
+  //Setting variable for drawing to be false as a default
+  var isDrawing = false, lastX = 0, lastY = 0;
    
 
    </script>
