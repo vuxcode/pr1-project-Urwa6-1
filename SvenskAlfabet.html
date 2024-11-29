@@ -280,4 +280,17 @@
   //Adding event listener for canvas interaction
   //For reset button
   resetBtn.addEventListener('click', resetCanvas);
-   </script>
+  //For Drawing by mouse
+  canvas.addEventListener('mousedown', startDrawing);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', stopDrawing);
+  canvas.addEventListener('mouseout', () => (isDrawing = false));
+  
+
+ 
+
+</script>
+
+</body>
+</html>
+   
