@@ -264,4 +264,16 @@
   relatedImage.style.display = 'block';
     }
   }
+
+  //Creating function to reset the canvas
+  function resetCanvas() {
+    //Clear all the traced pixels
+    tracedPixels.clear();
+    //Clearing the message
+    appreciationMessage.textContent = '';
+    //Removing the image
+    relatedImage.style.display = 'none';
+    //Selected letter displays
+    drawLetter(selectedLetter);
+  }
    </script>
