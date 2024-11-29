@@ -134,6 +134,16 @@
     });
     alphabetButtons.appendChild(button);
   });
-   
+
+    //Creating a function to draw the letter 
+    function drawLetter(letter) {
+    //Clear the entire visible canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //Clear the entire off-screen canvas
+    offscreenCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
+    //Setting font and styles for the letter 
+    ctx.font = "bold 200px Arial";
+    ctx.strokeStyle = "#605678";
+    ctx.lineWidth = 2;
 
    </script>
