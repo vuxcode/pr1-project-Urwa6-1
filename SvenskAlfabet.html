@@ -194,6 +194,26 @@
       y: event.offsetY,
     };
   }
+
+ //Start drawing if the click begins on the letter 
+  //At this point, the user can now drag to draw within the letter boundaries
+  //If the pixel is not part of the letter, the user cannot start drawing
+  //This avoids drawing outside the letter's boundaries
+  function startDrawing(event) {
+  // Prevent default behaviour to avoid issues with touch scrolling or browser actions
+  event.preventDefault();
+  // Get the x and y coordinates of the click or touch event relative to the canvas
+  var { x, y } = getCoordinates(event);
+    
+  // Check if the clicked or touched pixel is part of the letter
+  if (isPixelInLetter(x, y)) {
+  // If the pixel is part of the letter, enable drawing mode
+  isDrawing = true;
+  // Store the starting coordinates to track the user's drawing path
+  lastX = x;
+  lastY = y;
+    }
+  }
    
     
    </script>
