@@ -99,5 +99,15 @@
   var relatedImage = document.getElementById('relatedImage');
   //Variable for appreciation
   var appreciationMessage = document.getElementById('appreciationMessage');
+  
+  //Creating variables for off-screen
+  //Variable for off-screen canvas and shows it on the main screen 
+  var offscreenCanvas = document.createElement('canvas');
+  //Variable for off-screen context
+  var offscreenCtx = offscreenCanvas.getContext('2d');
+  //Adjusting off-screen width & height with canvas height & width
+  offscreenCanvas.width = canvas.width;
+  offscreenCanvas.height = canvas.height;
+   
 
    </script>
