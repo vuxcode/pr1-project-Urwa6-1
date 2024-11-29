@@ -244,5 +244,24 @@
       }
     }
   }
-    
+
+  //Creating function to stop the drawing process when the user releases the mouse or lifts their finger
+  function stopDrawing(event) {
+  //Prevent the default behavior of the event
+  event.preventDefault();
+  //Disable drawing mode as the user has stopped interacting with the canvas
+  isDrawing = false;
+
+  //Checking if the user has traced a significant portion of the letter
+  //threshold is set to more than 100 unique traced pixels
+  if (tracedPixels.size > 100) {
+  //Display an appreciation message for successfully tracing the letter
+  //I wanted to use document.write here but this option provides more control
+  appreciationMessage.textContent = `Great job! You traced the letter "${selectedLetter}"!`;
+  //Display related image
+  relatedImage.src = letterImages[selectedLetter];
+  //Makeing the image visible on the screen 
+  relatedImage.style.display = 'block';
+    }
+  }
    </script>
