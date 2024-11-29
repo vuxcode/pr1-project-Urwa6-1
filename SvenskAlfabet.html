@@ -171,6 +171,29 @@
   //Non-transparent pixels
   return pixelData[3] > 0;
   }
+
+  //Function to calculate and return the x and y coordinates of a user event relative to the canvas
+  function getCoordinates(event) {
+  //Get the bounding rectangle of the canvas
+  //This provides the canvas's position and size relative to the viewport
+  var rect = canvas.getBoundingClientRect();
     
+  // Check if the event is a touch event (used for mobile devices)
+  if (event.touches) {
+  // For touch events, use the first touch point's clientX and clientY coordinates
+  // Subtract the canvas's left and top offsets to get coordinates relative to the canvas
+   return {
+        x: event.touches[0].clientX - rect.left,
+        y: event.touches[0].clientY - rect.top,
+      };
+    }
+    // For mouse events, directly use the event's offsetX and offsetY properties
+    // These give the position of the cursor relative to the canvas
+    return {
+      x: event.offsetX,
+      y: event.offsetY,
+    };
+  }
+   
     
    </script>
