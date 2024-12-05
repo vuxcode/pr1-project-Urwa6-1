@@ -133,7 +133,13 @@
   //Creating variable for selected letter set A as a default
   var selectedLetter = 'A';
   //Creating variable for traced pixels and make a new set 
-  var tracedPixels = new Set();
+  var tracedPixels = new Set(); 
+  //Instead of new set we can do this 
+  //Creating an empty array to store traced pixels
+  //var tracedPixels = []; 
+  //For this we need to add function too check if pixel is already existed 
+  //I already used alot of functions thats why i wanted to skip one more function
+   
   //Setting variable for drawing to be false as a default
   var isDrawing = false, lastX = 0, lastY = 0;
 
