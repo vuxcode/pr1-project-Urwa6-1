@@ -30,15 +30,22 @@
       background-color: #640D5F;
       color: wheat;
     }
-  
     #myCanvas {
       border: 2px solid #FFBF61;
       background-color: #8ABFA3;
       display: block;
       margin: 20px auto;
     }
-
-      .canvas-image-container{
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: 2px solid darkblue;
+      background-color: goldenrod;
+      border-radius: 5px;
+    }
+    .canvas-image-container{
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -55,15 +62,6 @@
       height: auto;
       border: #640D5F, 2px;
 
-    }
-    button {
-      margin: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      border: 2px solid darkblue;
-      background-color: goldenrod;
-      border-radius: 5px;
     }
     button:hover {
       background-color: darkblue;
@@ -83,15 +81,16 @@
 <div id="page">
   <h1>Svensk Alfabet</h1>
   <div class="alphabet-container" id="alphabetButtons"></div>
-  <div class=canvas-image-container>
-     <canvas id="myCanvas" width="300" height="300"></canvas>
+  <div class="canvas-image-container">
+    <canvas id="myCanvas" width="300" height="300"></canvas>
     <img id="relatedImage" alt="relatedImage">
-    
   </div>
- 
+
   <div id="appreciationMessage"></div>
+
   <button id="resetBtn">Reset</button>
   <img id="relatedImage" alt="Related image">
+  <iframe width="300" height="150" src="https://www.youtube.com/embed/pwiyMIFLDpg?si=fwGoEHB0FmL1lOrn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
  <script> 
   //Creating variables on the top
@@ -106,6 +105,8 @@
     U: "images/uggla.jpg", V: "images/val.jpg", W: "images/wagon.jpg", X: "images/xylophone.jpg", Y: "images/yxa.jpg",
     Z: "images/zebra.jpg", Å: "images/asna.jpg", Ä: "images/apple.jpg", Ö: "images/odla.jpg"
   };
+  
+
   //Creating variables on the top
   //Creating variable for Alphabet buttons and get element by id
   var alphabetButtons = document.getElementById('alphabetButtons');
@@ -133,18 +134,12 @@
   //Creating variable for selected letter set A as a default
   var selectedLetter = 'A';
   //Creating variable for traced pixels and make a new set 
-  var tracedPixels = new Set(); 
-  //Instead of new set we can do this 
-  //Creating an empty array to store traced pixels
-  //var tracedPixels = []; 
-  //For this we need to add function too check if pixel is already existed 
-  //I already used alot of functions thats why i wanted to skip one more function
-   
+  var tracedPixels = new Set();
   //Setting variable for drawing to be false as a default
   var isDrawing = false, lastX = 0, lastY = 0;
 
+
   //Generate buttons for all the letters
-  //By using this i skipped the long process of creating a button for each Alphabet separately
   letters.forEach(letter => {
     //Get element by button id
     var button = document.createElement('button');
@@ -153,6 +148,7 @@
     //Applying styles
     button.className = 'alphabet-button';
     button.addEventListener('click', () => {
+
     //Update the selected letter
     selectedLetter = letter;
     //Reset the canvas 
@@ -175,14 +171,14 @@
     ctx.lineWidth = 2;
 
     //Calculating the position for centered text 
-    const x = canvas.width / 2 - 60;
-    const y = canvas.height / 2 + 60;
+    var x = canvas.width / 2 - 60;
+    var y = canvas.height / 2 + 60;
 
     //Draw the letter on both canvases
     //Visible for user 
     ctx.strokeText(letter, x, y);
     //Invisible used for checking on off-screen
-    offscreenCtx.font = "bold 200px Arial";
+    offscreenCtx.font = "200px Arial";
     offscreenCtx.fillStyle = "black";
     offscreenCtx.fillText(letter, x, y);
     }
@@ -290,6 +286,12 @@
   relatedImage.src = letterImages[selectedLetter];
   //Makeing the image visible on the screen 
   relatedImage.style.display = 'block';
+  //Audio 
+    // Play the sound for the selected letter
+
+        var audio = new Audio(letterSound[selectedLetter]);
+        audio.play();
+  
     }
   }
 
@@ -313,6 +315,11 @@
   canvas.addEventListener('mousemove', draw);
   canvas.addEventListener('mouseup', stopDrawing);
   canvas.addEventListener('mouseout', () => (isDrawing = false));
+  
+  //var canvas = document.getElementById(drawingCanvas");
+  //canvas.onmouseout = function () {
+  //isDrawing = false;
+  //};
 
   //For drawing by touch on mobile devices
   canvas.addEventListener('touchstart', startDrawing);
