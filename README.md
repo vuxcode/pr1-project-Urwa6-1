@@ -13,8 +13,17 @@ The final program is not the goal! The aim of the project is to show how you hav
 
 # Project Summary
 
-> Before the final submission date you should include a "PROJECT SUMMARY" in this section here. 
+I wanted to create Swedish Alphabets tracing app for kids so that they can able to learn alphanets easily. 
+I created all the letters using buttons for all the Alphabets.
+User can select any letter and trace it by finger or using mouse.
+After the alphabet has been traced by 100 pixels user get appreciation message.
+With appreciation message user can able to see image which starts with the letter, user has traced. 
 
 # User Guide
 
 > Write a clear user guide for how someone should use your program.
+> User can trace the alphabet.
+> User can select any letter by selecting any button letter.
+> User can reset the tracing for the selected alphabet as well.
+> User can get respond after they traced 100 pixels within the letter.
+> When the tracing is done, image related to the letter can be shown on the screen.
